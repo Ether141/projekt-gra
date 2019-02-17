@@ -1,8 +1,14 @@
-﻿using UnityEngine;
+﻿//Script for player control
+//by Bartek
+
+using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] private float speed = 2f;
+    [Header("Movement settings")]
+    [Tooltip("Speed of normal walk")] public float speed = 80;
+    [Tooltip("Can player move")] public bool canMove = true;
+
     private Rigidbody2D rb;
 
     private void Start()
@@ -10,12 +16,17 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
     }
 
-    void Update()
+    void LateUpdate()
+    {
+        Movement();
+    }
+
+    private void Movement ()
     {
         float moveHorizontal = Input.GetAxis("Horizontal");
         float moveVertical = Input.GetAxis("Vertical");
 
-        Vector2 movement = new Vector2(moveHorizontal * speed, moveVertical * speed);
-        rb.velocity = movement;
+        Vector2 movement = (canMove ? new Vector2(moveHorizontal, moveVertical) : Vector2.zero);
+        rb.velocity = movement * speed * Time.deltaTime;
     }
 }
