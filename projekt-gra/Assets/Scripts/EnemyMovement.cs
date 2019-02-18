@@ -11,7 +11,7 @@ public class EnemyMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        playerPosition = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
+        playerPosition = GameObject.FindGameObjectWithTag("Player").gameObject.transform;
     }
 
     // Update is called once per frame
