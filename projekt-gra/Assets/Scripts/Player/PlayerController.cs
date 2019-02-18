@@ -7,7 +7,7 @@ public class PlayerController : MonoBehaviour
 {
     [Header("Movement settings")]
     [Tooltip("Speed of normal walk")] public float speed = 80;
-    [Tooltip("Speed of normal walk")] public float sprintSpeed = 110;
+    [Tooltip("Speed of sprint")] public float sprintSpeed = 110;
     [Tooltip("Can player move")] public bool canMove = true;
     [Tooltip("Can player sprint")] public bool canSprint = true;
 
