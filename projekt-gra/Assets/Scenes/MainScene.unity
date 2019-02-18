@@ -1073,12 +1073,12 @@ MonoBehaviour:
   grounds:
   - sprite: {fileID: 21300000, guid: ea39ef0d47e40b74ebf6de9c726dac49, type: 3}
     clip: {fileID: 8300000, guid: 07f0aa8ed687a784d931041705a81894, type: 3}
-    volume1: 1
-    volume2: 0.8
+    volume1: 0.7
+    volume2: 0.5
   - sprite: {fileID: 21300000, guid: a1964caa00d22314bbcd5badc2ee9221, type: 3}
     clip: {fileID: 8300000, guid: 90abf6cb86407814d91a06ccf3d0cc33, type: 3}
-    volume1: 1
-    volume2: 0.8
+    volume1: 0.7
+    volume2: 0.5
 --- !u!1 &1609812696
 GameObject:
   m_ObjectHideFlags: 0
