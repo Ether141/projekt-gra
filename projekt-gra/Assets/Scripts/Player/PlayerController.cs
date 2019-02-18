@@ -19,20 +19,18 @@ public class PlayerController : MonoBehaviour
 
     private float moveHorizontal = 0;
     private float moveVertical = 0;
+    private Vector2 movement = Vector2.zero;
+    private float lastRot = 0;
 
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
     }
 
-    private void Update()
-    {
-        SetRotation();
-    }
-
     void LateUpdate()
     {
         Movement();
+        SetRotation();                  //I think, we won't need that function in futere, so it'll be removed in future
     }
 
     private void Movement ()
@@ -43,27 +41,21 @@ public class PlayerController : MonoBehaviour
         isMoving = (moveHorizontal != 0 || moveVertical != 0) && canMove;
         isSprinting = canSprint && Input.GetButton("Sprint") && canMove;
 
-        Vector2 movement = (canMove ? new Vector2(moveHorizontal, moveVertical) : Vector2.zero);
+        movement = (canMove ? new Vector2(moveHorizontal, moveVertical) : Vector2.zero);
         rb.velocity = movement * (isSprinting ? sprintSpeed : speed) * Time.deltaTime;
     }
 
     private void SetRotation ()
     {
-        if (moveHorizontal == 0 && moveVertical > 0)                    //Going up
-            transform.localEulerAngles = new Vector3(0, 0, 90);         
-        else if (moveHorizontal == 0 && moveVertical < 0)               //Going down
-            transform.localEulerAngles = new Vector3(0, 0, -90);        
-        else if(moveHorizontal > 0 && moveVertical == 0)                //Going right
-            transform.localEulerAngles = new Vector3(0, 0, 0);
-        else if (moveHorizontal < 0 && moveVertical == 0)               //Going left
-            transform.localEulerAngles = new Vector3(0, 0, 180);
-        else if (moveHorizontal > 0 && moveVertical > 0)                //Going top-right
-            transform.localEulerAngles = new Vector3(0, 0, 45);
-        else if (moveHorizontal < 0 && moveVertical > 0)                //Going top-left
-            transform.localEulerAngles = new Vector3(0, 0, 135);
-        else if (moveHorizontal > 0 && moveVertical < 0)                //Going down-right
-            transform.localEulerAngles = new Vector3(0, 0, 315);
-        else if (moveHorizontal < 0 && moveVertical < 0)                //Going down-left
-            transform.localEulerAngles = new Vector3(0, 0, 230);
+        if (isMoving)
+        {
+            float angle = Mathf.Atan2(movement.y, movement.x) * Mathf.Rad2Deg;
+            lastRot = angle;
+            transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+        }
+        else
+        {
+            transform.rotation = Quaternion.AngleAxis(lastRot, Vector3.forward);
+        }
     }
 }
