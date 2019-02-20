@@ -4,6 +4,10 @@
 //Actual stats:
 // - health
 // - stamina
+//
+//If you'd like to INCREASE or DECREASE actual level of health or stamina while gameplay, 
+//use prepared function designed for this: AddHealth, MinusHealth, AddStamina, MinusStamina
+//However, if you'd like to CHANGE value of max health, max stamina, edit variables directly.
 
 using UnityEngine;
 using UnityEngine.UI;
@@ -50,6 +54,14 @@ public class PlayerStats : MonoBehaviour
             regenStaminaCor = RegenStamina();
             StartCoroutine(regenStaminaCor);
         }
+
+        if (actualHealth == 0)
+            Death();
+    }
+
+    private void Death ()
+    {
+        Debug.Log("You died...");
     }
 
     #region Health manager functions
