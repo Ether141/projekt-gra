@@ -31,6 +31,7 @@ public class PlayerStats : MonoBehaviour
 
     private bool isRegenerating = false;
     private IEnumerator regenStaminaCor;
+    private float timer = 0;
 
     private void Start()
     {
@@ -42,9 +43,11 @@ public class PlayerStats : MonoBehaviour
         SetUI();
         CheckValues();
 
-        if(actualStamina < maxStamina && !isRegenerating)
+        timer += Time.deltaTime;
+        if(actualStamina < maxStamina && !isRegenerating && timer >= startRegenStaminaAfter)
         {
             Debug.Log("start");
+            regenStaminaCor = RegenStamina();
             StartCoroutine(regenStaminaCor);
         }
     }
@@ -74,6 +77,11 @@ public class PlayerStats : MonoBehaviour
     #region Stamina manager functions
     public void AddStamina(int staminaToAdd)
     {
+        if(isRegenerating) StopCoroutine(regenStaminaCor);
+        regenStaminaCor = null;
+        timer = 0;
+        isRegenerating = false;
+
         if (staminaToAdd + actualStamina <= maxStamina)
             actualStamina += staminaToAdd;
         else if (staminaToAdd + actualStamina > maxStamina)
@@ -84,7 +92,12 @@ public class PlayerStats : MonoBehaviour
 
     public void MinusStamina(int staminaToMinus)
     {
-        if (actualStamina - staminaToMinus > 0)
+        if (isRegenerating) StopCoroutine(regenStaminaCor);
+        regenStaminaCor = null;
+        timer = 0;
+        isRegenerating = false;
+
+        if (actualStamina - staminaToMinus >= 0)
             actualStamina -= staminaToMinus;
         else if (staminaToMinus - actualStamina < 0)
             actualStamina = 0;
@@ -95,13 +108,13 @@ public class PlayerStats : MonoBehaviour
     private IEnumerator RegenStamina ()
     {
         isRegenerating = true;
-        yield return new WaitForSeconds(startRegenStaminaAfter);
         while(actualStamina < maxStamina)
         {
             actualStamina += 5;
             yield return new WaitForSeconds(regenStaminaInterval);
         }
         isRegenerating = false;
+        regenStaminaCor = null;
     }
     #endregion
 

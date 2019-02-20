@@ -15,6 +15,9 @@ public class PlayerController : MonoBehaviour
     [Tooltip("Is player sprinting")] public bool isSprinting = false;
     [Tooltip("Is player moving")] public bool isMoving = false;
 
+    [Header("Other")]
+    [SerializeField] private PlayerStats stats;
+
     private Rigidbody2D rb;
 
     private float moveHorizontal = 0;
@@ -30,7 +33,7 @@ public class PlayerController : MonoBehaviour
     void LateUpdate()
     {
         Movement();
-        SetRotation();                  //I think, we won't need that function in futere, so it'll be removed in future
+        SetRotation();                  //I think, we won't need that function in future, so it'll be removed in future
     }
 
     private void Movement ()
@@ -39,10 +42,13 @@ public class PlayerController : MonoBehaviour
         moveVertical = Input.GetAxis("Vertical");
 
         isMoving = (moveHorizontal != 0 || moveVertical != 0) && canMove;
-        isSprinting = canSprint && Input.GetButton("Sprint") && canMove;
+        isSprinting = canSprint && Input.GetButton("Sprint") && canMove && isMoving;
 
         movement = (canMove ? new Vector2(moveHorizontal, moveVertical) : Vector2.zero);
         rb.velocity = movement * (isSprinting ? sprintSpeed : speed) * Time.deltaTime;
+
+        if(isSprinting)
+            stats.MinusStamina(1);
     }
 
     private void SetRotation ()
