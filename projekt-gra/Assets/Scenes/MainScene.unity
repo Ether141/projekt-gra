@@ -553,12 +553,12 @@ MonoBehaviour:
   actualHealth: 1000
   healthText: {fileID: 1494868759}
   healthBar: {fileID: 1101659285}
-  maxStamina: 1000
-  actualStamina: 1000
+  maxStamina: 300
+  actualStamina: 300
   staminaText: {fileID: 1584586259}
   staminaBar: {fileID: 1580660323}
   startRegenStaminaAfter: 3
-  regenStaminaInterval: 0.25
+  regenStaminaInterval: 0.2
 --- !u!1 &629523780
 GameObject:
   m_ObjectHideFlags: 0

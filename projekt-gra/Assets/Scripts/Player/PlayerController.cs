@@ -42,7 +42,7 @@ public class PlayerController : MonoBehaviour
         moveVertical = Input.GetAxis("Vertical");
 
         isMoving = (moveHorizontal != 0 || moveVertical != 0) && canMove;
-        isSprinting = canSprint && Input.GetButton("Sprint") && canMove && isMoving;
+        isSprinting = canSprint && Input.GetButton("Sprint") && canMove && isMoving && (stats.actualStamina > 0);
 
         movement = (canMove ? new Vector2(moveHorizontal, moveVertical) : Vector2.zero);
         rb.velocity = movement * (isSprinting ? sprintSpeed : speed) * Time.deltaTime;

@@ -20,8 +20,8 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] private Image healthBar;
 
     [Header("Stamina stat")]
-    public int maxStamina = 1000;
-    public int actualStamina = 1000;
+    public int maxStamina = 400;
+    public int actualStamina = 400;
     [Space]
     [SerializeField] private TextMeshProUGUI staminaText;
     [SerializeField] private Image staminaBar;
