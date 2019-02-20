@@ -45,6 +45,7 @@ public class PlayerController : MonoBehaviour
         isSprinting = canSprint && Input.GetButton("Sprint") && canMove && isMoving && (stats.actualStamina > 0);
 
         movement = (canMove ? new Vector2(moveHorizontal, moveVertical) : Vector2.zero);
+        movement.Normalize();
         rb.velocity = movement * (isSprinting ? sprintSpeed : speed) * Time.deltaTime;
 
         if(isSprinting)
