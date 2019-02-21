@@ -2936,7 +2936,6 @@ GameObject:
   - component: {fileID: 1588131580}
   - component: {fileID: 1588131582}
   - component: {fileID: 1588131581}
-  - component: {fileID: 1588131579}
   - component: {fileID: 1588131583}
   m_Layer: 0
   m_Name: Player
@@ -3004,17 +3003,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1588131579
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1588131576}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d07d9be50f61b41848760a342342503e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!50 &1588131580
 Rigidbody2D:
   serializedVersion: 4
